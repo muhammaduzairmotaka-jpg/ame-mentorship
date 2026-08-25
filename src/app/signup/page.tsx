@@ -77,7 +77,17 @@ export default function SignupPage() {
       return;
     }
 
-    setNeedsConfirmation(true);
+    // Only show the "check your email" screen for an actual unconfirmed-
+    // email error. Anything else (wrong password, rate limit, etc.) gets
+    // shown as a real error message so it's obvious what went wrong.
+    const msg = signInError.message.toLowerCase();
+    if (msg.includes("confirm")) {
+      setNeedsConfirmation(true);
+      setLoading(false);
+      return;
+    }
+
+    setError(`Account created, but couldn't sign you in automatically: ${signInError.message}`);
     setLoading(false);
   }
 
