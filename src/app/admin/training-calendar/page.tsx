@@ -26,7 +26,7 @@ export default function AdminTrainingCalendar() {
 
   return (
     <AppShell role="admin" links={links}>
-      <h1 className="text-2xl font-semibold mb-2 text-ink">Training Calendar</h1>
+      <h1 className="text-xl font-semibold mb-1.5 text-ink">Training Calendar</h1>
       <p className="text-sm text-ink-muted mb-6">
         Every mentor&apos;s training days at a glance, colour-coded by mentor.
       </p>

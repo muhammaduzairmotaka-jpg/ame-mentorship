@@ -87,7 +87,7 @@ export default function AvailabilityPage() {
 
   return (
     <AppShell role="mentor" links={links}>
-      <h1 className="text-2xl font-semibold mb-6 text-ink">Availability</h1>
+      <h1 className="text-xl font-semibold mb-4 text-ink">Availability</h1>
 
       <form onSubmit={handleAddRule} className="bg-white rounded-xl border border-cream-border p-5 mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>

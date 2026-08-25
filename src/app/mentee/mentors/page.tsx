@@ -28,7 +28,7 @@ export default function MenteeMentors() {
 
   return (
     <AppShell role="mentee" links={links}>
-      <h1 className="text-2xl font-semibold mb-6 text-ink">Find a Mentor</h1>
+      <h1 className="text-xl font-semibold mb-4 text-ink">Find a Mentor</h1>
 
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-1 space-y-2">

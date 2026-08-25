@@ -44,20 +44,20 @@ export default async function MenteeDashboard() {
 
   return (
     <AppShell role="mentee" links={links}>
-      <h1 className="text-2xl font-semibold mb-6 text-ink">My Dashboard</h1>
+      <h1 className="text-xl font-semibold mb-4 text-ink">My Dashboard</h1>
 
-      <div className="grid grid-cols-2 gap-4 mb-8">
-        <div className="rounded-xl border border-cream-border bg-cream-card p-4">
+      <div className="grid grid-cols-2 gap-3 mb-6">
+        <div className="rounded-lg border border-cream-border bg-cream-card p-3.5">
           <p className="text-xs text-ink-muted">Assigned mentor</p>
           <p className="text-lg font-semibold text-ink">{mentorName ?? "Not yet assigned"}</p>
         </div>
-        <div className="rounded-xl border border-cream-border bg-cream-card p-4">
+        <div className="rounded-lg border border-cream-border bg-cream-card p-3.5">
           <p className="text-xs text-ink-muted">Employment status</p>
           <p className="text-lg font-semibold capitalize text-ink">{mentee?.employment_status?.replace(/_/g, " ") ?? "—"}</p>
         </div>
       </div>
 
-      <section className="mb-8">
+      <section className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-medium text-ink">Upcoming appointments</h2>
           <Link href="/mentee/book" className="text-sm text-accent">Book a session →</Link>

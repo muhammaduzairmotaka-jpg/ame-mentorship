@@ -56,7 +56,7 @@ export default function AdminMenteesPage() {
   return (
     <AppShell role="admin" links={links}>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-ink">Mentees</h1>
+        <h1 className="text-xl font-semibold text-ink">Mentees</h1>
         <button onClick={exportCsv} className="rounded-md border border-cream-border px-3 py-1.5 text-sm hover:bg-cream">
           Export CSV
         </button>

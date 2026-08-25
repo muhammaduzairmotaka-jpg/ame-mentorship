@@ -64,7 +64,7 @@ export default function BookSessionPage() {
 
   return (
     <AppShell role="mentee" links={links}>
-      <h1 className="text-2xl font-semibold mb-6 text-ink">Book a Session</h1>
+      <h1 className="text-xl font-semibold mb-4 text-ink">Book a Session</h1>
 
       {status && <p className="mb-4 rounded-md bg-accent-soft px-3 py-2 text-sm text-accent">{status}</p>}
 

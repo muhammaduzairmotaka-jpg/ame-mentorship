@@ -28,27 +28,29 @@ export default function AppShell({
 
   return (
     <div className="min-h-screen flex bg-cream">
-      <aside className="w-56 shrink-0 border-r border-cream-border bg-white flex flex-col">
-        <div className="p-4 border-b border-cream-border">
+      <aside className="w-52 shrink-0 border-r border-cream-border bg-white flex flex-col">
+        <div className="px-4 py-3 border-b border-cream-border">
           <p className="font-semibold text-ink text-sm">AME Mentorship</p>
-          <span className={`inline-block mt-1 rounded px-2 py-0.5 text-xs font-medium capitalize ${badgeColor}`}>
+          <span className={`inline-block mt-1 rounded px-2 py-0.5 text-[11px] font-medium capitalize ${badgeColor}`}>
             {role}
           </span>
         </div>
-        <nav className="flex-1 p-3 space-y-1">
+        <nav className="flex-1 px-2.5 py-3 space-y-0.5">
           {links.map((l) => (
             <Link key={l.href} href={l.href}
-              className="block rounded-md px-3 py-2 text-sm text-ink hover:bg-cream-card">
+              className="block rounded-md px-2.5 py-1.5 text-[13px] text-ink hover:bg-cream-card">
               {l.label}
             </Link>
           ))}
         </nav>
         <button onClick={handleLogout}
-          className="m-3 rounded-md border border-cream-border px-3 py-2 text-sm text-ink-muted hover:bg-cream-card">
+          className="m-2.5 rounded-md border border-cream-border px-2.5 py-1.5 text-[13px] text-ink-muted hover:bg-cream-card">
           Log out
         </button>
       </aside>
-      <main className="flex-1 p-6 max-w-6xl">{children}</main>
+      <main className="flex-1 px-8 py-6">
+        <div className="max-w-4xl mx-auto">{children}</div>
+      </main>
     </div>
   );
 }

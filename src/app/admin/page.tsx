@@ -30,8 +30,8 @@ export default async function AdminDashboard() {
 
   return (
     <AppShell role="admin" links={links}>
-      <h1 className="text-2xl font-semibold mb-6 text-ink">Organization Overview</h1>
-      <div className="grid grid-cols-4 gap-4">
+      <h1 className="text-xl font-semibold mb-4 text-ink">Organization Overview</h1>
+      <div className="grid grid-cols-4 gap-3">
         <Stat label="Active mentors" value={mentorCount} />
         <Stat label="Active mentees" value={menteeCount} />
         <Stat label="Sessions this week" value={weekAppts} />
@@ -46,9 +46,9 @@ export default async function AdminDashboard() {
 
 function Stat({ label, value, highlight }: { label: string; value: number | null; highlight?: boolean }) {
   return (
-    <div className={`rounded-xl border p-4 ${highlight ? "border-warn bg-warn-soft" : "border-cream-border bg-cream-card"}`}>
+    <div className={`rounded-lg border p-3.5 ${highlight ? "border-warn bg-warn-soft" : "border-cream-border bg-cream-card"}`}>
       <p className="text-xs text-ink-muted">{label}</p>
-      <p className="text-2xl font-semibold text-ink">{value ?? 0}</p>
+      <p className="text-xl font-semibold text-ink">{value ?? 0}</p>
     </div>
   );
 }

@@ -209,7 +209,7 @@ export default function TrainingCalendar({
   const selectedSession = selectedSessions[0];
 
   return (
-    <div className="rounded-xl border border-cream-border bg-white p-4">
+    <div className="rounded-lg border border-cream-border bg-white p-3.5 max-w-lg">
       <div className="flex items-center justify-between mb-1">
         <p className="font-medium text-sm text-ink">{monthName} {year}</p>
         <div className="flex gap-1">

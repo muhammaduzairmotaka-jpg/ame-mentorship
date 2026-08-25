@@ -37,15 +37,15 @@ export default async function MentorDashboard() {
 
   return (
     <AppShell role="mentor" links={links}>
-      <h1 className="text-2xl font-semibold mb-6 text-ink">Mentor Dashboard</h1>
+      <h1 className="text-xl font-semibold mb-4 text-ink">Mentor Dashboard</h1>
 
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-3 mb-6">
         <StatCard label="Today's sessions" value={todaySessions?.length ?? 0} />
         <StatCard label="Upcoming (next 28d)" value={upcoming?.length ?? 0} />
         <StatCard label="Assigned mentees" value={assignedMentees?.length ?? 0} />
       </div>
 
-      <section className="mb-8">
+      <section className="mb-6">
         <h2 className="font-medium mb-3 text-ink">Today</h2>
         <SessionTable sessions={todaySessions ?? []} />
       </section>
@@ -60,9 +60,9 @@ export default async function MentorDashboard() {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-xl border border-cream-border bg-cream-card p-4">
+    <div className="rounded-lg border border-cream-border bg-cream-card p-3.5">
       <p className="text-xs text-ink-muted">{label}</p>
-      <p className="text-2xl font-semibold text-ink">{value}</p>
+      <p className="text-xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
