@@ -47,6 +47,15 @@ export default function SignupPage() {
       return;
     }
 
+    // Supabase doesn't return an error for a duplicate signup (to avoid
+    // leaking which emails are registered) — instead it returns a user
+    // with an empty `identities` array. Catch that and point them to login.
+    if (data.user.identities && data.user.identities.length === 0) {
+      setError("An account with this email already exists. Try logging in instead.");
+      setLoading(false);
+      return;
+    }
+
     // If email confirmations are off, signUp already returns a session and
     // we can go straight in. Otherwise, ask them to confirm first.
     if (data.session) {
