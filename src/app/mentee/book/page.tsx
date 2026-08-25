@@ -64,22 +64,22 @@ export default function BookSessionPage() {
 
   return (
     <AppShell role="mentee" links={links}>
-      <h1 className="text-2xl font-semibold mb-6">Book a Session</h1>
+      <h1 className="text-2xl font-semibold mb-6 text-ink">Book a Session</h1>
 
-      {status && <p className="mb-4 rounded-md bg-blue-50 px-3 py-2 text-sm text-blue-700">{status}</p>}
+      {status && <p className="mb-4 rounded-md bg-accent-soft px-3 py-2 text-sm text-accent">{status}</p>}
 
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-1">
-          <h2 className="font-medium mb-3">Mentors</h2>
-          {loading ? <p className="text-sm text-slate-500">Loading...</p> : (
+          <h2 className="font-medium mb-3 text-ink">Mentors</h2>
+          {loading ? <p className="text-sm text-ink-muted">Loading...</p> : (
             <div className="space-y-2">
               {mentors.map((m) => (
                 <button key={m.id} onClick={() => loadSessions(m.id)}
-                  className={`w-full text-left rounded-lg border px-4 py-3 text-sm ${selectedMentor === m.id ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-white hover:bg-slate-50"}`}>
+                  className={`w-full text-left rounded-lg border px-4 py-3 text-sm ${selectedMentor === m.id ? "border-accent bg-accent-soft" : "border-cream-border bg-white hover:bg-cream"}`}>
                   <p className="font-medium">{m.full_name}</p>
-                  <p className="text-xs text-slate-500">{m.company} · {m.years_experience ?? "—"} yrs</p>
+                  <p className="text-xs text-ink-muted">{m.company} · {m.years_experience ?? "—"} yrs</p>
                   {m.specialties?.length > 0 && (
-                    <p className="text-xs text-slate-400 mt-1">{m.specialties.join(", ")}</p>
+                    <p className="text-xs text-ink-muted mt-1">{m.specialties.join(", ")}</p>
                   )}
                 </button>
               ))}
@@ -88,22 +88,22 @@ export default function BookSessionPage() {
         </div>
 
         <div className="col-span-2">
-          <h2 className="font-medium mb-3">Available slots</h2>
-          {!selectedMentor && <p className="text-sm text-slate-500">Select a mentor to see availability.</p>}
-          {selectedMentor && !sessions.length && <p className="text-sm text-slate-500">No upcoming slots. Check back soon.</p>}
+          <h2 className="font-medium mb-3 text-ink">Available slots</h2>
+          {!selectedMentor && <p className="text-sm text-ink-muted">Select a mentor to see availability.</p>}
+          {selectedMentor && !sessions.length && <p className="text-sm text-ink-muted">No upcoming slots. Check back soon.</p>}
           <div className="space-y-2">
             {sessions.map((s) => {
               const isFull = s.booked_count >= s.capacity;
               return (
-                <div key={s.id} className="flex items-center justify-between bg-white rounded-lg border border-slate-200 px-4 py-3 text-sm">
+                <div key={s.id} className="flex items-center justify-between bg-white rounded-lg border border-cream-border px-4 py-3 text-sm">
                   <div>
                     <p className="font-medium">{s.session_date} · {s.start_time.slice(0,5)}–{s.end_time.slice(0,5)}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-ink-muted">
                       {s.session_type} · {s.location ?? "TBD"} · {s.booked_count}/{s.capacity} booked
                     </p>
                   </div>
                   <button onClick={() => handleBook(s)}
-                    className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${isFull ? "bg-amber-500 hover:bg-amber-600" : "bg-blue-600 hover:bg-blue-700"}`}>
+                    className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${isFull ? "bg-warn-soft0 hover:bg-amber-600" : "bg-accent hover:bg-accent-hover"}`}>
                     {isFull ? "Join waiting list" : "Book"}
                   </button>
                 </div>

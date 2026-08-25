@@ -14,30 +14,39 @@ const links = [
 export default function AdminTrainingCalendar() {
   const supabase = createClient();
   const [mentors, setMentors] = useState<{ id: string; full_name: string }[]>([]);
-  const [selected, setSelected] = useState<string>("");
+  const [editingFor, setEditingFor] = useState<string>("");
 
   useEffect(() => {
     (async () => {
       const { data } = await supabase.from("profiles").select("id, full_name").eq("role", "mentor").eq("is_active", true);
       setMentors(data ?? []);
-      if (data && data.length) setSelected(data[0].id);
+      if (data && data.length) setEditingFor(data[0].id);
     })();
   }, []);
 
   return (
     <AppShell role="admin" links={links}>
-      <h1 className="text-2xl font-semibold mb-6">Training Calendar</h1>
+      <h1 className="text-2xl font-semibold mb-2 text-ink">Training Calendar</h1>
+      <p className="text-sm text-ink-muted mb-6">
+        Every mentor&apos;s training days at a glance, colour-coded by mentor.
+      </p>
 
-      <div className="mb-4">
-        <label className="block text-xs font-medium mb-1">Managing availability for</label>
-        <select value={selected} onChange={(e) => setSelected(e.target.value)}
-          className="rounded-md border border-slate-300 px-3 py-2 text-sm">
-          {mentors.map((m) => <option key={m.id} value={m.id}>{m.full_name}</option>)}
-        </select>
-      </div>
+      {mentors.length > 0 ? (
+        <TrainingCalendar mentors={mentors} canEdit={false} canSignup={false} />
+      ) : (
+        <p className="text-sm text-ink-muted">No active mentors yet. Add one from the Mentees page or database first.</p>
+      )}
 
-      {selected && <TrainingCalendar mentorId={selected} canEdit canSignup={false} />}
-      {!mentors.length && <p className="text-sm text-slate-500">No active mentors yet. Add one from the Mentees page or database first.</p>}
+      {mentors.length > 0 && (
+        <div className="mt-8">
+          <label className="block text-xs font-medium mb-1 text-ink">Edit availability for</label>
+          <select value={editingFor} onChange={(e) => setEditingFor(e.target.value)}
+            className="mb-4 rounded-md border border-cream-border px-3 py-2 text-sm">
+            {mentors.map((m) => <option key={m.id} value={m.id}>{m.full_name}</option>)}
+          </select>
+          {editingFor && <TrainingCalendar mentorId={editingFor} canEdit canSignup={false} />}
+        </div>
+      )}
     </AppShell>
   );
 }

@@ -56,15 +56,15 @@ export default function AdminMenteesPage() {
   return (
     <AppShell role="admin" links={links}>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Mentees</h1>
-        <button onClick={exportCsv} className="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">
+        <h1 className="text-2xl font-semibold text-ink">Mentees</h1>
+        <button onClick={exportCsv} className="rounded-md border border-cream-border px-3 py-1.5 text-sm hover:bg-cream">
           Export CSV
         </button>
       </div>
 
-      {loading ? <p className="text-sm text-slate-500">Loading...</p> : (
-        <table className="w-full text-sm bg-white rounded-lg border border-slate-200 overflow-hidden">
-          <thead className="bg-slate-100 text-left">
+      {loading ? <p className="text-sm text-ink-muted">Loading...</p> : (
+        <table className="w-full text-sm bg-white rounded-lg border border-cream-border overflow-hidden">
+          <thead className="bg-cream-card text-left">
             <tr>
               <th className="px-3 py-2">Name</th>
               <th className="px-3 py-2">Email</th>
@@ -75,18 +75,18 @@ export default function AdminMenteesPage() {
           </thead>
           <tbody>
             {mentees.map((m) => (
-              <tr key={m.profile_id} className="border-t border-slate-100">
+              <tr key={m.profile_id} className="border-t border-cream-border">
                 <td className="px-3 py-2">{m.profiles?.full_name}</td>
-                <td className="px-3 py-2 text-slate-500">{m.profiles?.email}</td>
+                <td className="px-3 py-2 text-ink-muted">{m.profiles?.email}</td>
                 <td className="px-3 py-2">
                   <select value={m.assigned_mentor_id ?? ""} onChange={(e) => assignMentor(m.profile_id, e.target.value)}
-                    className="rounded-md border border-slate-300 px-2 py-1 text-xs">
+                    className="rounded-md border border-cream-border px-2 py-1 text-xs">
                     <option value="">Unassigned</option>
                     {mentors.map((mt) => <option key={mt.id} value={mt.id}>{mt.full_name}</option>)}
                   </select>
                 </td>
                 <td className="px-3 py-2 capitalize">{m.employment_status?.replace(/_/g," ")}</td>
-                <td className="px-3 py-2">{m.requires_follow_up ? <span className="text-amber-600 font-medium">Yes</span> : "No"}</td>
+                <td className="px-3 py-2">{m.requires_follow_up ? <span className="text-warn font-medium">Yes</span> : "No"}</td>
               </tr>
             ))}
           </tbody>

@@ -44,48 +44,48 @@ export default async function MenteeDashboard() {
 
   return (
     <AppShell role="mentee" links={links}>
-      <h1 className="text-2xl font-semibold mb-6">My Dashboard</h1>
+      <h1 className="text-2xl font-semibold mb-6 text-ink">My Dashboard</h1>
 
       <div className="grid grid-cols-2 gap-4 mb-8">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <p className="text-xs text-slate-500">Assigned mentor</p>
-          <p className="text-lg font-semibold">{mentorName ?? "Not yet assigned"}</p>
+        <div className="rounded-xl border border-cream-border bg-cream-card p-4">
+          <p className="text-xs text-ink-muted">Assigned mentor</p>
+          <p className="text-lg font-semibold text-ink">{mentorName ?? "Not yet assigned"}</p>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <p className="text-xs text-slate-500">Employment status</p>
-          <p className="text-lg font-semibold capitalize">{mentee?.employment_status?.replace(/_/g, " ") ?? "—"}</p>
+        <div className="rounded-xl border border-cream-border bg-cream-card p-4">
+          <p className="text-xs text-ink-muted">Employment status</p>
+          <p className="text-lg font-semibold capitalize text-ink">{mentee?.employment_status?.replace(/_/g, " ") ?? "—"}</p>
         </div>
       </div>
 
       <section className="mb-8">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="font-medium">Upcoming appointments</h2>
-          <Link href="/mentee/book" className="text-sm text-blue-600">Book a session →</Link>
+          <h2 className="font-medium text-ink">Upcoming appointments</h2>
+          <Link href="/mentee/book" className="text-sm text-accent">Book a session →</Link>
         </div>
         {upcomingBookings?.length ? (
           <ul className="space-y-2">
             {upcomingBookings.map((b: any) => (
-              <li key={b.id} className="bg-white rounded-lg border border-slate-200 px-4 py-3 text-sm flex justify-between">
+              <li key={b.id} className="bg-white rounded-lg border border-cream-border px-4 py-3 text-sm flex justify-between">
                 <span>{b.sessions?.session_date} at {b.sessions?.start_time?.slice(0,5)} with {b.sessions?.profiles?.full_name}</span>
-                <span className="capitalize text-slate-500">{b.status.replace(/_/g," ")}</span>
+                <span className="capitalize text-ink-muted">{b.status.replace(/_/g," ")}</span>
               </li>
             ))}
           </ul>
-        ) : <p className="text-sm text-slate-500">No upcoming appointments.</p>}
+        ) : <p className="text-sm text-ink-muted">No upcoming appointments.</p>}
       </section>
 
       <section>
-        <h2 className="font-medium mb-3">Recent feedback</h2>
+        <h2 className="font-medium mb-3 text-ink">Recent feedback</h2>
         {visibleAssessments?.length ? (
           <ul className="space-y-2">
             {visibleAssessments.map((a: any, i: number) => (
-              <li key={i} className="bg-white rounded-lg border border-slate-200 px-4 py-3 text-sm">
+              <li key={i} className="bg-white rounded-lg border border-cream-border px-4 py-3 text-sm">
                 <p className="font-medium">{a.development_categories?.name} — <span className="capitalize">{a.rating.replace(/_/g," ")}</span></p>
-                {a.written_feedback && <p className="text-slate-600 mt-1">{a.written_feedback}</p>}
+                {a.written_feedback && <p className="text-ink-muted mt-1">{a.written_feedback}</p>}
               </li>
             ))}
           </ul>
-        ) : <p className="text-sm text-slate-500">No feedback shared yet.</p>}
+        ) : <p className="text-sm text-ink-muted">No feedback shared yet.</p>}
       </section>
     </AppShell>
   );

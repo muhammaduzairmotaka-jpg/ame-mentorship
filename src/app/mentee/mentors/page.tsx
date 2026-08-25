@@ -28,26 +28,26 @@ export default function MenteeMentors() {
 
   return (
     <AppShell role="mentee" links={links}>
-      <h1 className="text-2xl font-semibold mb-6">Find a Mentor</h1>
+      <h1 className="text-2xl font-semibold mb-6 text-ink">Find a Mentor</h1>
 
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-1 space-y-2">
           {mentors.map((m) => (
             <button key={m.id} onClick={() => setSelected(m.id)}
-              className={`w-full text-left rounded-lg border px-4 py-3 text-sm ${selected === m.id ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-white hover:bg-slate-50"}`}>
+              className={`w-full text-left rounded-lg border px-4 py-3 text-sm ${selected === m.id ? "border-accent bg-accent-soft" : "border-cream-border bg-white hover:bg-cream"}`}>
               <p className="font-medium">{m.full_name}</p>
-              <p className="text-xs text-slate-500">{m.company} · {m.years_experience ?? "—"} yrs</p>
-              {m.specialties?.length > 0 && <p className="text-xs text-slate-400 mt-1">{m.specialties.join(", ")}</p>}
+              <p className="text-xs text-ink-muted">{m.company} · {m.years_experience ?? "—"} yrs</p>
+              {m.specialties?.length > 0 && <p className="text-xs text-ink-muted mt-1">{m.specialties.join(", ")}</p>}
             </button>
           ))}
-          {!mentors.length && <p className="text-sm text-slate-500">No mentors listed yet.</p>}
+          {!mentors.length && <p className="text-sm text-ink-muted">No mentors listed yet.</p>}
         </div>
 
         <div className="col-span-2">
           {selected && userId ? (
             <TrainingCalendar mentorId={selected} canEdit={false} canSignup currentUserId={userId} />
           ) : (
-            <p className="text-sm text-slate-500">Select a mentor to see their available training days.</p>
+            <p className="text-sm text-ink-muted">Select a mentor to see their available training days.</p>
           )}
         </div>
       </div>

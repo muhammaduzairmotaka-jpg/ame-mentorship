@@ -87,48 +87,48 @@ export default function AvailabilityPage() {
 
   return (
     <AppShell role="mentor" links={links}>
-      <h1 className="text-2xl font-semibold mb-6">Availability</h1>
+      <h1 className="text-2xl font-semibold mb-6 text-ink">Availability</h1>
 
-      <form onSubmit={handleAddRule} className="bg-white rounded-xl border border-slate-200 p-5 mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <form onSubmit={handleAddRule} className="bg-white rounded-xl border border-cream-border p-5 mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>
           <label className="block text-xs font-medium mb-1">Day of week</label>
           <select value={form.day_of_week} onChange={(e) => setForm({ ...form, day_of_week: e.target.value })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm">
             {DAYS.map((d, i) => <option key={i} value={i}>{d}</option>)}
           </select>
         </div>
         <div>
           <label className="block text-xs font-medium mb-1">Start time</label>
           <input type="time" value={form.start_time} onChange={(e) => setForm({ ...form, start_time: e.target.value })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm" />
         </div>
         <div>
           <label className="block text-xs font-medium mb-1">End time</label>
           <input type="time" value={form.end_time} onChange={(e) => setForm({ ...form, end_time: e.target.value })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm" />
         </div>
         <div>
           <label className="block text-xs font-medium mb-1">Session length (min)</label>
           <input type="number" value={form.session_length_minutes}
             onChange={(e) => setForm({ ...form, session_length_minutes: Number(e.target.value) })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm" />
         </div>
         <div>
           <label className="block text-xs font-medium mb-1">Break between (min)</label>
           <input type="number" value={form.break_minutes}
             onChange={(e) => setForm({ ...form, break_minutes: Number(e.target.value) })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm" />
         </div>
         <div>
           <label className="block text-xs font-medium mb-1">Capacity per slot</label>
           <input type="number" min={1} value={form.capacity_per_slot}
             onChange={(e) => setForm({ ...form, capacity_per_slot: Number(e.target.value) })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm" />
         </div>
         <div>
           <label className="block text-xs font-medium mb-1">Type</label>
           <select value={form.session_type} onChange={(e) => setForm({ ...form, session_type: e.target.value })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm">
             <option value="individual">Individual</option>
             <option value="group">Group</option>
           </select>
@@ -136,25 +136,25 @@ export default function AvailabilityPage() {
         <div>
           <label className="block text-xs font-medium mb-1">Location</label>
           <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })}
-            className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+            className="w-full rounded-md border border-cream-border px-2 py-1.5 text-sm" />
         </div>
         <div className="col-span-2 md:col-span-4 flex items-center gap-3 pt-2">
-          <button type="submit" className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
+          <button type="submit" className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover">
             Add recurring availability
           </button>
           <button type="button" onClick={handleGenerateSessions}
-            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-50">
+            className="rounded-md border border-cream-border px-4 py-2 text-sm font-medium hover:bg-cream">
             Generate bookable slots (next 28 days)
           </button>
         </div>
-        {status && <p className="col-span-2 md:col-span-4 text-sm text-slate-600">{status}</p>}
+        {status && <p className="col-span-2 md:col-span-4 text-sm text-ink-muted">{status}</p>}
       </form>
 
-      <h2 className="font-medium mb-3">Current recurring rules</h2>
-      {loading ? <p className="text-sm text-slate-500">Loading...</p> : (
+      <h2 className="font-medium mb-3 text-ink">Current recurring rules</h2>
+      {loading ? <p className="text-sm text-ink-muted">Loading...</p> : (
         <div className="space-y-2">
           {rules.map((r) => (
-            <div key={r.id} className="flex items-center justify-between bg-white rounded-lg border border-slate-200 px-4 py-3 text-sm">
+            <div key={r.id} className="flex items-center justify-between bg-white rounded-lg border border-cream-border px-4 py-3 text-sm">
               <span>
                 {DAYS[r.day_of_week]} · {r.start_time.slice(0,5)}–{r.end_time.slice(0,5)} ·
                 {" "}{r.session_length_minutes}min sessions · cap {r.capacity_per_slot} · {r.session_type} · {r.location}
@@ -162,7 +162,7 @@ export default function AvailabilityPage() {
               <button onClick={() => handleDelete(r.id)} className="text-red-600 hover:underline">Remove</button>
             </div>
           ))}
-          {!rules.length && <p className="text-sm text-slate-500">No recurring availability set yet.</p>}
+          {!rules.length && <p className="text-sm text-ink-muted">No recurring availability set yet.</p>}
         </div>
       )}
     </AppShell>

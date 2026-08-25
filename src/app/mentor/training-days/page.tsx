@@ -25,7 +25,7 @@ export default function MentorTrainingDays() {
   return (
     <AppShell role="mentor" links={links}>
       <h1 className="text-2xl font-semibold mb-2">Hands-On Training Days</h1>
-      <p className="text-sm text-slate-500 mb-6">
+      <p className="text-sm text-ink-muted mb-6">
         Mark the days you're free for group hands-on training. Each day caps at 5 mentees, first come first served.
       </p>
       {userId && <TrainingCalendar mentorId={userId} canEdit canSignup={false} />}

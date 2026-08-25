@@ -37,7 +37,7 @@ export default async function MentorDashboard() {
 
   return (
     <AppShell role="mentor" links={links}>
-      <h1 className="text-2xl font-semibold mb-6">Mentor Dashboard</h1>
+      <h1 className="text-2xl font-semibold mb-6 text-ink">Mentor Dashboard</h1>
 
       <div className="grid grid-cols-3 gap-4 mb-8">
         <StatCard label="Today's sessions" value={todaySessions?.length ?? 0} />
@@ -46,12 +46,12 @@ export default async function MentorDashboard() {
       </div>
 
       <section className="mb-8">
-        <h2 className="font-medium mb-3">Today</h2>
+        <h2 className="font-medium mb-3 text-ink">Today</h2>
         <SessionTable sessions={todaySessions ?? []} />
       </section>
 
       <section>
-        <h2 className="font-medium mb-3">Upcoming</h2>
+        <h2 className="font-medium mb-3 text-ink">Upcoming</h2>
         <SessionTable sessions={upcoming ?? []} showDate />
       </section>
     </AppShell>
@@ -60,18 +60,18 @@ export default async function MentorDashboard() {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4">
-      <p className="text-xs text-slate-500">{label}</p>
-      <p className="text-2xl font-semibold">{value}</p>
+    <div className="rounded-xl border border-cream-border bg-cream-card p-4">
+      <p className="text-xs text-ink-muted">{label}</p>
+      <p className="text-2xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
 
 function SessionTable({ sessions, showDate }: { sessions: any[]; showDate?: boolean }) {
-  if (!sessions.length) return <p className="text-sm text-slate-500">No sessions.</p>;
+  if (!sessions.length) return <p className="text-sm text-ink-muted">No sessions.</p>;
   return (
-    <table className="w-full text-sm bg-white rounded-lg border border-slate-200 overflow-hidden">
-      <thead className="bg-slate-100 text-left">
+    <table className="w-full text-sm bg-white rounded-lg border border-cream-border overflow-hidden">
+      <thead className="bg-cream-card text-left">
         <tr>
           {showDate && <th className="px-3 py-2">Date</th>}
           <th className="px-3 py-2">Time</th>
@@ -81,7 +81,7 @@ function SessionTable({ sessions, showDate }: { sessions: any[]; showDate?: bool
       </thead>
       <tbody>
         {sessions.map((s) => (
-          <tr key={s.id} className="border-t border-slate-100">
+          <tr key={s.id} className="border-t border-cream-border">
             {showDate && <td className="px-3 py-2">{s.session_date}</td>}
             <td className="px-3 py-2">{s.start_time?.slice(0, 5)}–{s.end_time?.slice(0, 5)}</td>
             <td className="px-3 py-2 capitalize">{s.status.replace(/_/g, " ")}</td>
