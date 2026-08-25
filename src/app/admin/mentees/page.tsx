@@ -8,6 +8,7 @@ const links = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/mentees", label: "Mentees" },
   { href: "/admin/training-calendar", label: "Training Calendar" },
+  { href: "/admin/records", label: "Records" },
   { href: "/calendar", label: "Org Calendar" },
 ];
 

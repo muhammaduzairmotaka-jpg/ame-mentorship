@@ -8,6 +8,7 @@ const links = [
   { href: "/mentor", label: "Dashboard" },
   { href: "/mentor/availability", label: "1:1 Availability" },
   { href: "/mentor/training-days", label: "Training Days" },
+  { href: "/mentor/mentees", label: "My Mentees" },
   { href: "/calendar", label: "Org Calendar" },
 ];
 

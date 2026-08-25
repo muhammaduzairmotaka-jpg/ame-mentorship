@@ -15,6 +15,7 @@ type Booking = {
   id: string;
   mentee_id: string;
   full_name: string;
+  attendance_status: string | null;
 };
 
 const DEFAULT_CAPACITY = 5;
@@ -65,6 +66,8 @@ export default function TrainingCalendar({
   const [loading, setLoading] = useState(true);
   const [bulkDates, setBulkDates] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
+  const [noteOpenFor, setNoteOpenFor] = useState<string | null>(null);
+  const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
 
   const multiMode = !!mentors?.length;
   const mentorIds = useMemo(
@@ -105,12 +108,13 @@ export default function TrainingCalendar({
   async function loadBookings(sessionId: string) {
     const { data } = await supabase
       .from("bookings")
-      .select("id, mentee_id, status, profiles!bookings_mentee_id_fkey(full_name)")
+      .select("id, mentee_id, status, attendance_status, profiles!bookings_mentee_id_fkey(full_name)")
       .eq("session_id", sessionId)
       .eq("status", "booked");
 
     const rows: Booking[] = (data ?? []).map((b: any) => ({
       id: b.id, mentee_id: b.mentee_id, full_name: b.profiles?.full_name ?? "Unknown",
+      attendance_status: b.attendance_status ?? null,
     }));
     setBookings(rows);
     setMyBookingId(rows.find((r) => r.mentee_id === currentUserId)?.id ?? null);
@@ -176,6 +180,28 @@ export default function TrainingCalendar({
     await supabase.from("bookings").update({ status: "cancelled_by_mentor", cancelled_at: new Date().toISOString() }).eq("id", bookingId);
     if (selectedDate) await selectDate(selectedDate);
     await loadMonth();
+  }
+
+  async function markAttendance(bookingId: string, status: string) {
+    await supabase.from("bookings").update({ attendance_status: status }).eq("id", bookingId);
+    if (selectedDate) await selectDate(selectedDate);
+  }
+
+  async function saveNote(bookingId: string) {
+    const text = (noteDrafts[bookingId] ?? "").trim();
+    if (!text || !currentUserId) return;
+    const { error } = await supabase.from("session_notes").insert({
+      booking_id: bookingId,
+      author_id: currentUserId,
+      notes: text,
+    });
+    if (!error) {
+      setNoteDrafts((prev) => ({ ...prev, [bookingId]: "" }));
+      setNoteOpenFor(null);
+      setMsg("Note saved.");
+    } else {
+      setMsg(`Error saving note: ${error.message}`);
+    }
   }
 
   async function signUp() {
@@ -289,10 +315,43 @@ export default function TrainingCalendar({
                   )}
                   <p className="text-xs text-ink-muted mb-2">{bookings.length}/{s.capacity} spots filled</p>
                   {bookings.length ? bookings.map((b) => (
-                    <div key={b.id} className="flex items-center justify-between text-sm py-1 border-b border-cream-border last:border-0">
-                      <span className="text-ink">{b.full_name}</span>
-                      {canEdit && (
-                        <button onClick={() => removeBooking(b.id)} className="text-xs text-red-600 hover:underline">Remove</button>
+                    <div key={b.id} className="py-1.5 border-b border-cream-border last:border-0">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-ink">{b.full_name}</span>
+                        <span className="flex items-center gap-2">
+                          {canEdit && (
+                            <select
+                              value={b.attendance_status ?? ""}
+                              onChange={(e) => markAttendance(b.id, e.target.value)}
+                              className="rounded border border-cream-border px-1.5 py-0.5 text-[11px] text-ink"
+                            >
+                              <option value="">Pending</option>
+                              <option value="attended">Attended</option>
+                              <option value="no_show">No-show</option>
+                            </select>
+                          )}
+                          {canEdit && (
+                            <button onClick={() => setNoteOpenFor(noteOpenFor === b.id ? null : b.id)} className="text-xs text-accent hover:underline">
+                              Note
+                            </button>
+                          )}
+                          {canEdit && (
+                            <button onClick={() => removeBooking(b.id)} className="text-xs text-red-600 hover:underline">Remove</button>
+                          )}
+                        </span>
+                      </div>
+                      {canEdit && noteOpenFor === b.id && (
+                        <div className="mt-1.5 flex gap-1.5">
+                          <input
+                            value={noteDrafts[b.id] ?? ""}
+                            onChange={(e) => setNoteDrafts((prev) => ({ ...prev, [b.id]: e.target.value }))}
+                            placeholder="Session note for this mentee..."
+                            className="flex-1 rounded border border-cream-border px-2 py-1 text-xs"
+                          />
+                          <button onClick={() => saveNote(b.id)} className="rounded bg-accent px-2 py-1 text-[11px] font-medium text-white hover:bg-accent-hover">
+                            Save
+                          </button>
+                        </div>
                       )}
                     </div>
                   )) : <p className="text-sm text-ink-muted">No sign-ups yet.</p>}

@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import AppShell from "@/components/AppShell";
+import CancelBookingButton from "@/components/CancelBookingButton";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -66,9 +67,12 @@ export default async function MenteeDashboard() {
         {upcomingBookings?.length ? (
           <ul className="space-y-2">
             {upcomingBookings.map((b: any) => (
-              <li key={b.id} className="bg-white rounded-lg border border-cream-border px-4 py-3 text-sm flex justify-between">
+              <li key={b.id} className="bg-white rounded-lg border border-cream-border px-4 py-3 text-sm flex items-center justify-between gap-3">
                 <span>{b.sessions?.session_date} at {b.sessions?.start_time?.slice(0,5)} with {b.sessions?.profiles?.full_name}</span>
-                <span className="capitalize text-ink-muted">{b.status.replace(/_/g," ")}</span>
+                <span className="flex items-center gap-3 shrink-0">
+                  <span className="capitalize text-ink-muted">{b.status.replace(/_/g," ")}</span>
+                  <CancelBookingButton bookingId={b.id} />
+                </span>
               </li>
             ))}
           </ul>

@@ -9,6 +9,7 @@ const links = [
   { href: "/mentor", label: "Dashboard" },
   { href: "/mentor/availability", label: "1:1 Availability" },
   { href: "/mentor/training-days", label: "Training Days" },
+  { href: "/mentor/mentees", label: "My Mentees" },
   { href: "/calendar", label: "Org Calendar" },
 ];
 
@@ -29,7 +30,7 @@ export default function MentorTrainingDays() {
       <p className="text-sm text-ink-muted mb-6">
         Mark the days you're free for group hands-on training. Each day caps at 5 mentees, first come first served.
       </p>
-      {userId && <TrainingCalendar mentorId={userId} canEdit canSignup={false} />}
+      {userId && <TrainingCalendar mentorId={userId} canEdit canSignup={false} currentUserId={userId} />}
     </AppShell>
   );
 }
