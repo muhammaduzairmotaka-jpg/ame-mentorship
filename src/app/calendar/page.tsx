@@ -21,7 +21,7 @@ export default function OrgCalendarPage() {
         const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
         setRole((profile?.role as any) ?? null);
       }
-      const { data } = await supabase.from("profiles").select("id, full_name").eq("role", "mentor").eq("is_active", true);
+      const { data } = await supabase.from("mentor_public_profiles").select("id, full_name");
       setMentors(data ?? []);
       setLoading(false);
     })();
