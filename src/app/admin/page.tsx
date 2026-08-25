@@ -6,6 +6,7 @@ const links = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/mentees", label: "Mentees" },
   { href: "/admin/training-calendar", label: "Training Calendar" },
+  { href: "/calendar", label: "Org Calendar" },
 ];
 
 export default async function AdminDashboard() {

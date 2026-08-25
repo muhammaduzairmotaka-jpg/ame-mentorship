@@ -9,6 +9,7 @@ const links = [
   { href: "/mentee", label: "Dashboard" },
   { href: "/mentee/book", label: "Book 1:1 Session" },
   { href: "/mentee/mentors", label: "Find a Mentor" },
+  { href: "/calendar", label: "Org Calendar" },
 ];
 
 export default function MenteeMentors() {

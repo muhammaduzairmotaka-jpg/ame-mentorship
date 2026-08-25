@@ -6,6 +6,7 @@ const links = [
   { href: "/mentor", label: "Dashboard" },
   { href: "/mentor/availability", label: "1:1 Availability" },
   { href: "/mentor/training-days", label: "Training Days" },
+  { href: "/calendar", label: "Org Calendar" },
 ];
 
 export default async function MentorDashboard() {
